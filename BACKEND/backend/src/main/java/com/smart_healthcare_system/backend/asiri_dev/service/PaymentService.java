@@ -7,8 +7,11 @@ import com.smart_healthcare_system.backend.asiri_dev.repository.PaymentRepositor
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
@@ -39,7 +42,7 @@ public class PaymentService {
         List <Payment> payments = paymentRepository.findAll();
         return payments.stream().map(this::mapToPaymentResponse).toList();
     }
-    public PaymentResponse mapToPaymentResponse(Payment payment){
+    public PaymentResponse mapToPaymentResponse(Payment payment) {
         return PaymentResponse.builder()
                 .paymentId(payment.getPaymentId())
                 .paymentCategory(payment.getPaymentCategory())
@@ -54,4 +57,26 @@ public class PaymentService {
                 .build();
 
     }
+
+    //Update Payment
+    public void updatePayment(String paymentId, PaymentRequest paymentRequest){
+        Payment existingPayment = paymentRepository.findById(paymentId)
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND,"Payment not found"));
+
+        Payment updatedPayment = Payment.builder()
+                .paymentId(existingPayment.getPaymentId())
+                .paymentCategory(existingPayment.getPaymentCategory())
+                .paymentAmount(existingPayment.getPaymentAmount())
+                .paymentType(existingPayment.getPaymentType())
+                .cardholderName(existingPayment.getCardholderName())
+                .cardNumber(existingPayment.getCardNumber())
+                .expiryDate(existingPayment.getExpiryDate())
+                .cvv(existingPayment.getCvv())
+                .remarks(paymentRequest.getRemarks())
+                .status(paymentRequest.getStatus())
+                .build();
+        paymentRepository.save(updatedPayment);
+        log.info("Payment updated");
+    }
+
 }
