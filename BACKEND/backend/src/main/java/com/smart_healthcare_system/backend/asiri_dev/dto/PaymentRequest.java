@@ -1,33 +1,23 @@
-package com.smart_healthcare_system.backend.asiri_dev.model;
+package com.smart_healthcare_system.backend.asiri_dev.dto;
 
+import com.smart_healthcare_system.backend.asiri_dev.model.Payment;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "Payments")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Data
-public class Payment {
-    @Id
-    private String paymentId;
+public class PaymentRequest {
     private String paymentCategory;
     private int paymentAmount;
-    private PaymentType paymentType;
+    private Payment.PaymentType paymentType;
     private String cardholderName;
     private String cardNumber;
     private String expiryDate;
     private String cvv;
     private String remarks;
     private String status;
-
-    public enum PaymentType{
-        Cash,
-        Card,
-        Insurance
-    }
 }
