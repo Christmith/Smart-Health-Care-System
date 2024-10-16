@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class PaymentResponse {
     private String paymentId;
+    private Payment.paymentCategory paymentCategory;
+    private int paymentAmount;
     private Payment.PaymentType paymentType;
     private String cardholderName;
     private String cardNumber;
