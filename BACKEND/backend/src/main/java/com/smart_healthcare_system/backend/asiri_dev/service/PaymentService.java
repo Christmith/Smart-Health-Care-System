@@ -16,7 +16,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class PaymentService {
+public class PaymentService implements PaymentServiceInterface {
     private final PaymentRepository paymentRepository;
 
     //Create Payment
@@ -29,8 +29,8 @@ public class PaymentService {
                 .cardNumber(paymentRequest.getCardNumber())
                 .expiryDate(paymentRequest.getExpiryDate())
                 .cvv(paymentRequest.getCvv())
-                .remarks(paymentRequest.getRemarks())
-                .status(paymentRequest.getStatus())
+                .remarks(paymentRequest.getRemarks() != null ? paymentRequest.getRemarks() : "")
+                .status(paymentRequest.getStatus() != null ? paymentRequest.getStatus() : "progress")
                 .build();
 
         paymentRepository.save(payment);
