@@ -31,5 +31,12 @@ public class PaymentController {
                 return paymentService.findAllPayments();
         }
 
+        //Update Payment
+        @PutMapping("/{paymentId}")
+        @ResponseStatus(HttpStatus.OK)
+        public void updatePayment(@PathVariable String paymentId, @RequestBody PaymentRequest paymentRequest) {
+                paymentService.updatePayment(paymentId, paymentRequest);
+        }
+
 
 }
