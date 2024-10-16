@@ -15,7 +15,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Payment {
     @Id
     private String paymentId;
-    private String paymentCategory;
+    private paymentCategory paymentCategory;
     private int paymentAmount;
     private PaymentType paymentType;
     private String cardholderName;
@@ -29,5 +29,13 @@ public class Payment {
         Cash,
         Card,
         Insurance
+    }
+    public enum paymentCategory{
+        Consultation,
+        Medication,
+        Surgery,
+        LabTest,
+        Room_Rental,
+        Miscellaneous,
     }
 }

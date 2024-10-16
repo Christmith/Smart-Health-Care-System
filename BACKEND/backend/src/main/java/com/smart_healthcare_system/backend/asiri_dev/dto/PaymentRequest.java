@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class PaymentRequest {
-    private String paymentCategory;
+    private Payment.paymentCategory paymentCategory;
     private int paymentAmount;
     private Payment.PaymentType paymentType;
     private String cardholderName;
