@@ -49,7 +49,7 @@ public class PaymentService {
                 .cardNumber(payment.getCardNumber())
                 .expiryDate(payment.getExpiryDate())
                 .cvv(payment.getCvv())
-                .remarks(payment.getCvv())
+                .remarks(payment.getRemarks())
                 .status(payment.getStatus())
                 .build();
 
