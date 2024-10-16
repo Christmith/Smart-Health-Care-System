@@ -79,4 +79,15 @@ public class PaymentService {
         log.info("Payment updated");
     }
 
+    //Delete Payment
+    public void deletePayment(String paymentId){
+        if(paymentRepository.existsById(paymentId)){
+            paymentRepository.deleteById(paymentId);
+            log.info("Payment deleted");
+        }
+        else{
+            throw new ResponseStatusException(NOT_FOUND,"Payment not found");
+        }
+    }
+
 }

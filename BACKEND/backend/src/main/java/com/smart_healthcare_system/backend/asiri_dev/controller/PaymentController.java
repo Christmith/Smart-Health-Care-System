@@ -38,5 +38,11 @@ public class PaymentController {
                 paymentService.updatePayment(paymentId, paymentRequest);
         }
 
+        @DeleteMapping("/{paymentId}")
+        @ResponseStatus(HttpStatus.NO_CONTENT)
+        public void deletePayment(@PathVariable String paymentId) {
+                paymentService.deletePayment(paymentId);
+        }
+
 
 }
