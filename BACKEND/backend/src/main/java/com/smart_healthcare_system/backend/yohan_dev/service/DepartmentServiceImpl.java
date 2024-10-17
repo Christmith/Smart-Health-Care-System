@@ -19,23 +19,34 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public void createDepartment(DepartmentReq departmentReq) {
-        Department department = Department.builder()
-                .departmentName(departmentReq.getDepartmentName())
-                .departmentDescription(departmentReq.getDepartmentDescription())
-                .build();
+        try {
+            Department department = Department.builder()
+                    .departmentName(departmentReq.getDepartmentName())
+                    .departmentDescription(departmentReq.getDepartmentDescription())
+                    .build();
 
-        departmentRepository.save(department);
-        log.info("Department {} is created.", department.getDepartmentName());
+            departmentRepository.save(department);
+            log.info("Department {} is created.", department.getDepartmentName());
+        } catch (Exception e) {
+            log.error("Error while creating department: {}", e.getMessage());
+            throw new RuntimeException("Failed to create department");
+        }
     }
 
     @Override
     public List<DepartmentRes> getAllDepartments() {
-        List <Department> departments = departmentRepository.findAll();
-        return departments.stream().map(this::mapToDepartmentResponse).toList();
+        try {
+            List<Department> departments = departmentRepository.findAll();
+            return departments.stream().map(this::mapToDepartmentResponse).toList();
+        } catch (Exception e) {
+            log.error("Error while fetching departments: {}", e.getMessage());
+            throw new RuntimeException("Failed to fetch departments");
+        }
     }
 
     private DepartmentRes mapToDepartmentResponse(Department department) {
         return DepartmentRes.builder()
+                .departmentId(department.getDepartmentId())
                 .departmentName(department.getDepartmentName())
                 .departmentDescription(department.getDepartmentDescription())
                 .build();
