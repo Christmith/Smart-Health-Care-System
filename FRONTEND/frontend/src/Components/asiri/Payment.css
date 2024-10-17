@@ -1,0 +1,21 @@
+.payment-card {
+    max-width: 500px;
+    margin: auto;
+}
+
+.payment-card form {
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.payment-card img {
+    width: 48px;
+    height: 48px;
+}
+.credit-card-image {
+    width: 500px; /* Increase the image size */
+    float: right; /* Move the image to the right */
+    margin-left: 20px; /* Add some space between the form and the image */
+    margin-bottom: 20px; /* Add some space below the image */
+}
+
