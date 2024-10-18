@@ -56,7 +56,7 @@ function App() {
         <BrowserRouter>
 
             <Routes>
-                {/* <Route path="/" element={<Pay/>} /> */}
+                <Route path="/" element={<Pay/>} />
                 <Route path="/admin" element={<AdminPanel />} />
                 <Route
                     element={
