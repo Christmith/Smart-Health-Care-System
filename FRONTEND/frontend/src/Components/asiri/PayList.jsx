@@ -95,73 +95,49 @@ function PayList() {
                 {payment.map((payment) => (
                   <tr key={payment.paymentId}>
                     <td>
-                      {editablePaymentId === payment.paymentId ? (
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={payment.paymentCategory}
-                          onChange={(e) => handleChange(e, "paymentCategory", payment.paymentId)}
-                        />
-                      ) : (
-                        payment.paymentCategory
-                      )}
+                      {/* Disable Payment Category field during edit */}
+                      {payment.paymentCategory}
+                    </td>
+                    <td>
+                      {/* Disable Amount field during edit */}
+                      {payment.paymentAmount}
+                    </td>
+                    <td>
+                      {/* Disable Payment Type field during edit */}
+                      {payment.paymentType}
+                    </td>
+                    <td>
+                      {/* Disable Cardholder Name field during edit */}
+                      {payment.cardholderName}
                     </td>
                     <td>
                       {editablePaymentId === payment.paymentId ? (
-                        <input
-                          type="number"
+                        <select
                           className="form-control"
-                          value={payment.paymentAmount}
-                          onChange={(e) => handleChange(e, "paymentAmount", payment.paymentId)}
-                        />
-                      ) : (
-                        payment.paymentAmount
-                      )}
-                    </td>
-                    <td>
-                      {editablePaymentId === payment.paymentId ? (
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={payment.paymentType}
-                          onChange={(e) => handleChange(e, "paymentType", payment.paymentId)}
-                        />
-                      ) : (
-                        payment.paymentType
-                      )}
-                    </td>
-                    <td>
-                      {editablePaymentId === payment.paymentId ? (
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={payment.cardholderName}
-                          onChange={(e) => handleChange(e, "cardholderName", payment.paymentId)}
-                        />
-                      ) : (
-                        payment.cardholderName
-                      )}
-                    </td>
-                    <td>
-                      {editablePaymentId === payment.paymentId ? (
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={payment.remarks}
+                          value={payment.remarks || "Select Remarks"}  // Set default value
                           onChange={(e) => handleChange(e, "remarks", payment.paymentId)}
-                        />
+                        >
+                          <option disabled value="Select Remarks">Select Remarks</option>  {/* Placeholder */}
+                          <option value="Thank you for Your Payment">Thank you for Your Payment</option>
+                          <option value="Payment Was not received">Payment Was not received</option>
+                          <option value="Payment is processing">Payment is processing</option>
+                        </select>
                       ) : (
                         payment.remarks
                       )}
                     </td>
                     <td>
                       {editablePaymentId === payment.paymentId ? (
-                        <input
-                          type="text"
+                        <select
                           className="form-control"
-                          value={payment.status}
+                          value={payment.status || "Select Status"}  // Set default value
                           onChange={(e) => handleChange(e, "status", payment.paymentId)}
-                        />
+                        >
+                          <option disabled value="Select Status">Select Status</option>  {/* Placeholder */}
+                          <option value="Pending">Pending</option>
+                          <option value="Completed">Completed</option>
+                          <option value="Failed">Failed</option>
+                        </select>
                       ) : (
                         payment.status
                       )}
@@ -169,15 +145,15 @@ function PayList() {
                     <td>
                       {editablePaymentId === payment.paymentId ? (
                         <>
-                          <button className="btn btn-success" onClick={() => handleUpdate(payment.paymentId)}>Save</button>
-                          <button className="btn btn-danger" onClick={() => setEditablePaymentId(null)}>Cancel</button>
+                          <button className="btn btn-success action-button me-2" onClick={() => handleUpdate(payment.paymentId)}>Save</button>
+                          <button className="btn btn-danger action-button" onClick={() => setEditablePaymentId(null)}>Cancel</button>
                         </>
                       ) : (
                         <>
-                          <button className="btn btn-warning" onClick={() => handleEdit(payment.paymentId)}>
+                          <button className="btn btn-warning action-button me-2" onClick={() => handleEdit(payment.paymentId)}>
                             <FontAwesomeIcon icon={faEdit} />
                           </button>
-                          <button className="btn btn-danger" onClick={() => handleDelete(payment.paymentId)}>
+                          <button className="btn btn-danger action-button" onClick={() => handleDelete(payment.paymentId)}>
                             <FontAwesomeIcon icon={faTrash} />
                           </button>
                         </>
@@ -190,6 +166,19 @@ function PayList() {
           </div>
         </center>
       </div>
+
+      {/* CSS Styles */}
+      <style jsx>{`
+        .action-button {
+          width: 90px; /* Set button width */
+          height: 35px; /* Set button height */
+          display: inline-block;
+        }
+
+        .action-button .fa-edit, .action-button .fa-trash {
+          margin-right: 5px; /* Optional: to align icons nicely */
+        }
+      `}</style>
     </>
   );
 }
