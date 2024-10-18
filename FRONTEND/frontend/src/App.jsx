@@ -48,6 +48,11 @@ import Dashboard from "./Components/asiri/Dashboard.jsx";
 import AppointmentList from "./Components/asiri/AppointmentList.jsx";
 import ServiceList from "./Components/yohan/ServiceList.jsx";
 import Pay from "./Components/asiri/Pay.jsx";
+import CustomerLayout from "./components/common/CustomerLayout";
+import Profile from "./Components/chamath/Profile.jsx";
+import Appointments from "./Components/Kalindu/Appointments.jsx";
+import CustomerPayments from "./Components/asiri/CustomerPayments.jsx";
+
 
 
 
@@ -76,6 +81,18 @@ function App() {
                 >
                     <Route path="admin/service/servicelist" element= {<ServiceList />}/>
                     
+                </Route>
+
+                <Route
+                    element={
+                        <CustomerLayout page={"patient"} menu={["Profile", "Appointments", "Payments"]}></CustomerLayout>
+                    }
+                >
+                    <Route path="user/" element= {<Profile />}/>
+                    <Route path="user/patient/profile" element= {<Profile />}/>
+                    <Route path="user/patient/appointments" element= {<Appointments />}/>
+                    <Route path="user/patient/payments" element= {<AppointmentList />}/>
+
                 </Route>
 
 

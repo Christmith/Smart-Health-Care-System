@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import Arrow from "../../assets/Arrow5.png";
 import DELogo from "../../assets/logo2.png";
 
-export default function SideBar({ page, menu }) {
+export default function SideBar({ page, menu, user }) {
     let [url, setUrl] = React.useState(window.location.pathname.toString());
     console.log(url);
 
     const menuItems = menu.map((item) => {
-        const itemUrl = `/admin/${page.toLowerCase()}/${item
+        const itemUrl = `/${user}/${page.toLowerCase()}/${item
             .toLowerCase()
             .split(" ")
             .join("")}`;
@@ -75,7 +75,9 @@ export default function SideBar({ page, menu }) {
             <br />
             <br />
             <ul className="nav nav-pills flex-column mb-auto">{menuItems}</ul>
+            <button>Log Out</button>
             <hr />
+
         </div>
     );
 }
