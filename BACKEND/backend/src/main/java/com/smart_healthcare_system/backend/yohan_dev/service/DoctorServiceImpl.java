@@ -61,6 +61,19 @@ public class DoctorServiceImpl implements DoctorService {
         }
     }
 
+    // Get Doctor By DoctorId
+    @Override
+    public DoctorRes getDoctorById(String doctorId) {
+        try {
+            Doctor doctor = doctorRepository.findById(doctorId)
+                    .orElseThrow(() -> new RuntimeException("Doctor not found"));
+            return mapToDoctorResponse(doctor);
+        } catch (Exception e) {
+            log.error("Error while fetching doctor by doctorId: {}", e.getMessage());
+            throw new RuntimeException("Failed to fetch doctor by doctorId");
+        }
+    }
+
     // Map Doctor to Doctor Response
     private DoctorRes mapToDoctorResponse(Doctor doctor) {
         return DoctorRes.builder()

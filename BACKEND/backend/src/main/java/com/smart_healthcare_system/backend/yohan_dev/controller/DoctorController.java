@@ -49,4 +49,15 @@ public class DoctorController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    // Get Doctor By DoctorId
+    @GetMapping("/{doctorId}")
+    public ResponseEntity<DoctorRes> getDoctorById(@PathVariable String doctorId) {
+        try {
+            DoctorRes doctor = doctorService.getDoctorById(doctorId);
+            return new ResponseEntity<>(doctor, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
