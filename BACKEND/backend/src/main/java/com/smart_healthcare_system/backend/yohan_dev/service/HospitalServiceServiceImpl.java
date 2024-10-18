@@ -11,6 +11,7 @@ import com.smart_healthcare_system.backend.yohan_dev.repository.HospitalServiceR
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -93,6 +94,7 @@ public class HospitalServiceServiceImpl implements HospitalServiceService {
                     .selectedDays(hospitalServiceReq.getSelectedDays())
                     .selectedDoctors(hospitalServiceReq.getSelectedDoctors())
                     .timeSlots(hospitalServiceReq.getTimeSlots())
+                    .createdAt(hospitalService.getCreatedAt())
                     .build();
 
             // Save the updated service in the repository
@@ -238,6 +240,8 @@ public class HospitalServiceServiceImpl implements HospitalServiceService {
                 .selectedDays(hospitalService.getSelectedDays())
                 .selectedDoctors(hospitalService.getSelectedDoctors())
                 .timeSlots(hospitalService.getTimeSlots())
+                .createdAt(hospitalService.getCreatedAt())
+                .updatedAt(hospitalService.getUpdatedAt())
                 .build();
     }
 }
