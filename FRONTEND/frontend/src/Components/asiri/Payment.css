@@ -1,21 +1,63 @@
+Payment Card Styles
 .payment-card {
-    max-width: 500px;
-    margin: auto;
+    max-width: 700px;
+    margin: 0 auto;
 }
 
-.payment-card form {
-    border-radius: 8px;
-    padding: 20px;
+.payment-card .form-control {
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.payment-card .form-group label {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.payment-card .form-group input,
+.payment-card .form-group select {
+    padding: 10px;
+    font-size: 1rem;
+}
+
+.payment-card button {
+    background-color: #28a745;
+    border-color: #28a745;
+    padding: 10px;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+}
+
+.payment-card button:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.payment-card .form-row {
+    margin-bottom: 1.5rem;
 }
 
 .payment-card img {
-    width: 48px;
-    height: 48px;
-}
-.credit-card-image {
-    width: 500px; /* Increase the image size */
-    float: right; /* Move the image to the right */
-    margin-left: 20px; /* Add some space between the form and the image */
-    margin-bottom: 20px; /* Add some space below the image */
+    height: 30px;
+    margin: 5px;
 }
 
+.payment-card .text-danger {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.payment-card .container {
+    padding-top: 30px;
+}
+
+.payment-card h3 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+}
+.payment-card-container {
+    max-width: 900px; /* You can adjust this value based on how wide you want the form */
+    margin: 0 auto;   /* Center the card */
+}
