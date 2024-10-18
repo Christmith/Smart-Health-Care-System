@@ -9,4 +9,5 @@ public interface DoctorService {
     void createDoctor(DoctorReq doctorReq);
     List<DoctorRes> getAllDoctors();
     List<DoctorRes> getDoctorsByDepartmentId(String departmentId);
+    DoctorRes getDoctorById(String doctorId);
 }
