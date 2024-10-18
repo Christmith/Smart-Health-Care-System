@@ -47,6 +47,8 @@ import PayList from "./Components/asiri/PayList.jsx";
 import Dashboard from "./Components/asiri/Dashboard.jsx";
 import AppointmentList from "./Components/asiri/AppointmentList.jsx";
 import ServiceList from "./Components/yohan/ServiceList.jsx";
+import Pay from "./Components/asiri/Pay.jsx";
+
 
 
 function App() {
@@ -54,6 +56,7 @@ function App() {
         <BrowserRouter>
 
             <Routes>
+                {/* <Route path="/" element={<Pay/>} /> */}
                 <Route path="/admin" element={<AdminPanel />} />
                 <Route
                     element={
