@@ -39,24 +39,24 @@ public class AppointmentService {
 
 
     public AppointmentResponse mapToAppointmentResponse(Appointment appointment) {
-        // Fetch patient data using patientId from appointment
-        Optional<Customer> patientOptional = patientRepository.findById(appointment.getPatientId());
-        PatientResponse patientResponse = patientOptional.map(patient -> PatientResponse.builder()
-                .patientId(patient.getCustomerId())
-                .fullName(patient.getFullName())
-                .phoneNumber(patient.getPhoneNumber())
-                .email(patient.getEmail())
-                .bloodType(patient.getBloodType())
-                .build()).orElse(null);
-
-        // Fetch doctor data using doctorId from appointment
-        Optional<Doctor> doctorOptional = doctorRes.findById(appointment.getDoctorId());
-        DoctorResponse doctorResponse = doctorOptional.map(doctor -> DoctorResponse.builder()
-                .doctorId(doctor.getDoctorId())
-                .doctorName(doctor.getDoctorName())
-                .doctorSpecialization(doctor.getDoctorSpecialization())
-                .doctorRegNo(doctor.getDoctorRegNo())
-                .build()).orElse(null);
+//        // Fetch patient data using patientId from appointment
+//        Optional<Customer> patientOptional = patientRepository.findById(appointment.getPatientId());
+//        PatientResponse patientResponse = patientOptional.map(patient -> PatientResponse.builder()
+//                .patientId(patient.getCustomerId())
+//                .fullName(patient.getFullName())
+//                .phoneNumber(patient.getPhoneNumber())
+//                .email(patient.getEmail())
+//                .bloodType(patient.getBloodType())
+//                .build()).orElse(null);
+//
+//        // Fetch doctor data using doctorId from appointment
+//        Optional<Doctor> doctorOptional = doctorRes.findById(appointment.getDoctorId());
+//        DoctorResponse doctorResponse = doctorOptional.map(doctor -> DoctorResponse.builder()
+//                .doctorId(doctor.getDoctorId())
+//                .doctorName(doctor.getDoctorName())
+//                .doctorSpecialization(doctor.getDoctorSpecialization())
+//                .doctorRegNo(doctor.getDoctorRegNo())
+//                .build()).orElse(null);
 
         // Map all data into AppointmentResponse DTO
         return AppointmentResponse.builder()
@@ -64,8 +64,8 @@ public class AppointmentService {
                 .appointmentDesc(appointment.getAppointmentDesc())
                 .appointmentStatus(String.valueOf(appointment.getAppointmentStatus()))
                 .appointmentDateTime(appointment.getAppointmentDateTime().toString())  // You can format this if needed
-                .patient(patientResponse)
-                .doctor(doctorResponse)
+                .patient(appointment.getPatientId())
+                .doctor(appointment.getDoctorId())
                 .build();
     }
 
