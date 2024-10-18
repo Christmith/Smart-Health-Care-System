@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -30,9 +30,8 @@ public class HospitalService {
     private List<String> selectedDays;
     private List<String> selectedDoctors;
     private Map<String, List<Map<String, String>>> timeSlots;
-
     @CreatedDate
-    private LocalDateTime createdAt;
+    private Date createdAt;
     @LastModifiedDate
-    private LocalDateTime updatedAt;
+    private Date updatedAt;
 }
