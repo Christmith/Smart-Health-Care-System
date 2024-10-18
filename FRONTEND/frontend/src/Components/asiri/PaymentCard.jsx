@@ -1,5 +1,5 @@
-import  { useState } from "react";
-import axios from "axios"; // Import Axios for making API requests
+import { useState } from "react";
+import axios from "axios";
 import "./Payment.css";
 
 const PaymentCard = () => {
@@ -9,10 +9,8 @@ const PaymentCard = () => {
         Medication: 3000,
     };
 
-    const [paymentCategory, setPaymentCategory] = useState("Consultation");
-    const [paymentAmount, setPaymentAmount] = useState(
-        paymentOptions.Consultation
-    );
+    const [paymentCategory, setPaymentCategory] = useState("");
+    const [paymentAmount, setPaymentAmount] = useState("");
     const [paymentType, setPaymentType] = useState("Card");
     const [formData, setFormData] = useState({
         cardholderName: "",
@@ -41,6 +39,13 @@ const PaymentCard = () => {
         setIsSubmitting(true);
         setError(null);
 
+        // Real-time validations
+        if (!formData.cardholderName || formData.cardNumber.length < 16 || formData.expiryDate.length !== 5 || formData.cvv.length !== 3) {
+            setError("Please enter valid card details.");
+            setIsSubmitting(false);
+            return;
+        }
+
         const paymentData = {
             paymentCategory,
             paymentAmount,
@@ -67,10 +72,10 @@ const PaymentCard = () => {
     };
 
     return (
-        <div className="container payment-card mt-4">
-            <h3 className="mb-4">Enter Payment Details</h3>
-            <form className="p-4 shadow-sm bg-light rounded" onSubmit={handleSubmit}>
-                <div className="form-group mb-3">
+        <div className="container payment-card mt-5">
+            <h3 className="text-center mb-4">Enter Payment Details</h3>
+            <form className="p-4 shadow-lg bg-white rounded" onSubmit={handleSubmit} style={{ maxWidth: "600px", margin: "0 auto" }}>
+                <div className="form-group mb-4">
                     <label htmlFor="paymentCategory">Payment Category</label>
                     <select
                         className="form-control"
@@ -78,6 +83,7 @@ const PaymentCard = () => {
                         value={paymentCategory}
                         onChange={handleCategoryChange}
                     >
+                        <option value="" disabled>Select a category</option>
                         {Object.keys(paymentOptions).map((option) => (
                             <option key={option} value={option}>
                                 {option}
@@ -86,7 +92,7 @@ const PaymentCard = () => {
                     </select>
                 </div>
 
-                <div className="form-group mb-3">
+                <div className="form-group mb-4">
                     <label htmlFor="paymentAmount">Payment Amount (LKR)</label>
                     <input
                         type="text"
@@ -97,7 +103,7 @@ const PaymentCard = () => {
                     />
                 </div>
 
-                <div className="form-group mb-3">
+                <div className="form-group mb-4">
                     <label htmlFor="paymentType">Payment Type</label>
                     <select
                         className="form-control"
@@ -113,9 +119,8 @@ const PaymentCard = () => {
 
                 {paymentType === "Card" && (
                     <>
-                        {/* Align cardholderName and cardNumber side by side */}
-                        <div className="form-row">
-                            <div className="form-group col-md-6 mb-3">
+                        <div className="form-row mb-4">
+                            <div className="form-group col-md-6">
                                 <label htmlFor="cardholderName">Cardholder Name</label>
                                 <input
                                     type="text"
@@ -124,10 +129,11 @@ const PaymentCard = () => {
                                     name="cardholderName"
                                     value={formData.cardholderName}
                                     onChange={handleInputChange}
+                                    required
                                 />
                             </div>
 
-                            <div className="form-group col-md-6 mb-3">
+                            <div className="form-group col-md-6">
                                 <label htmlFor="cardNumber">Card Number</label>
                                 <input
                                     type="text"
@@ -137,13 +143,15 @@ const PaymentCard = () => {
                                     value={formData.cardNumber}
                                     onChange={handleInputChange}
                                     placeholder="XXXX XXXX XXXX XXXX"
+                                    required
+                                    minLength="16"
+                                    maxLength="16"
                                 />
                             </div>
                         </div>
 
-                        {/* Align expiryDate and cvv side by side */}
-                        <div className="form-row">
-                            <div className="form-group col-md-6 mb-3">
+                        <div className="form-row mb-4">
+                            <div className="form-group col-md-6">
                                 <label htmlFor="expiryDate">Expiry Date</label>
                                 <input
                                     type="text"
@@ -153,10 +161,12 @@ const PaymentCard = () => {
                                     value={formData.expiryDate}
                                     onChange={handleInputChange}
                                     placeholder="MM/YY"
+                                    required
+                                    pattern="\d{2}/\d{2}"
                                 />
                             </div>
 
-                            <div className="form-group col-md-6 mb-3">
+                            <div className="form-group col-md-6">
                                 <label htmlFor="cvv">CVV</label>
                                 <input
                                     type="text"
@@ -166,25 +176,14 @@ const PaymentCard = () => {
                                     value={formData.cvv}
                                     onChange={handleInputChange}
                                     placeholder="XXX"
+                                    required
+                                    minLength="3"
+                                    maxLength="3"
                                 />
                             </div>
                         </div>
 
-                        {/* <div className="form-group text-center">
-              <img src={creditcard} alt="Mastercard"/>
-
-            </div> */}
-
-
-
-                        {/* <img
-                src={creditcard}
-                alt="Credit Card"
-                className="credit-card-image"
-              /> */}
-
-
-                        <div className="form-group text-center">
+                        <div className="form-group text-center mb-4">
                             <img
                                 src="https://img.icons8.com/color/48/000000/mastercard-logo.png"
                                 alt="Mastercard"
@@ -196,15 +195,14 @@ const PaymentCard = () => {
                                 className="mx-2"
                             />
                         </div>
-
                     </>
                 )}
 
-                {error && <p className="text-danger">{error}</p>}
+                {error && <p className="text-danger text-center">{error}</p>}
 
                 <button
                     type="submit"
-                    className="btn btn-primary mt-3"
+                    className="btn btn-primary btn-block mt-3"
                     disabled={isSubmitting}
                 >
                     {isSubmitting ? "Submitting..." : "Submit Payment"}
