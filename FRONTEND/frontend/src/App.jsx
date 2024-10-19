@@ -91,7 +91,7 @@ function App() {
                     <Route path="user/" element= {<Profile />}/>
                     <Route path="user/patient/profile" element= {<Profile />}/>
                     <Route path="user/patient/appointments" element= {<Appointments />}/>
-                    <Route path="user/patient/payments" element= {<AppointmentList />}/>
+                    <Route path="user/patient/payments" element= {<PaymentCard />}/>
 
                 </Route>
 
