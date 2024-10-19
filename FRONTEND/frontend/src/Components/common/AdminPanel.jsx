@@ -161,7 +161,7 @@ export default function AdminPanel() {
             style={imageStyle}
           />
           <div style={adminTextStyle}>
-            <h2 style={adminNameStyle}>Asiri Chathurika</h2>
+            <h2 style={adminNameStyle}>Asiri Alwis</h2>
             <p style={adminPositionStyle}>Super Admin</p>
           </div>
         </div>
@@ -179,7 +179,7 @@ export default function AdminPanel() {
             />
             Dashboard
           </Link>
-          <Link to={"appointments"} style={linkStyle}>
+          <Link to={"payment/dashboard"} style={linkStyle}>
             <FontAwesomeIcon
               icon={faClipboardList}
               style={{ marginRight: "10px" }}
@@ -273,7 +273,7 @@ export default function AdminPanel() {
               </div>
             </Link>
 
-            <Link to={"appointments"} style={{ textDecoration: "none" }}>
+            <Link to={"payment/dashboard"} style={{ textDecoration: "none" }}>
               <div
                 className="card div-shadow"
                 style={cardStyle}
