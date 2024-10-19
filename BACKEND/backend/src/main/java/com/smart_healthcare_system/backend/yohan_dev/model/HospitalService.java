@@ -27,6 +27,7 @@ public class HospitalService {
     private List<PaymentOption> paymentOption;
     private String department;
     private String location;
+    private Boolean status;
     private List<String> selectedDays;
     private List<String> selectedDoctors;
     private Map<String, List<Map<String, String>>> timeSlots;
