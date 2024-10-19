@@ -34,8 +34,8 @@ const DashboardCards = () => {
       </div>
 
       <div style={cardStyle}>
-        <h3 style={{ fontWeight: 'bold' }}>Total Amount Paid</h3>
-        <h4>{paymentData.reduce((total, payment) => total + payment.paymentAmount, 0)}</h4>
+        <h3 style={{ fontWeight: 'bold' }}>Total Amount Received</h3>
+        <h4>LKR {paymentData.reduce((total, payment) => total + payment.paymentAmount, 0)}</h4>
       </div>
 
       <div style={cardStyle}>
