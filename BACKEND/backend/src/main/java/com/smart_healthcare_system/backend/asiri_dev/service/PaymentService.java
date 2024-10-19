@@ -69,6 +69,11 @@ public class PaymentService implements PaymentServiceInterface {
         Payment existingPayment = paymentRepository.findById(paymentId)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND,"Payment not found"));
 
+        // Validate payment amount
+        if (paymentRequest.getPaymentAmount() <= 0) {
+            throw new IllegalArgumentException("Invalid payment amount");
+        }
+
         Payment updatedPayment = Payment.builder()
                 .paymentId(existingPayment.getPaymentId())
                 .paymentCategory(existingPayment.getPaymentCategory())
