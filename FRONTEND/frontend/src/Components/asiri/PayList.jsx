@@ -76,7 +76,7 @@ function PayList() {
   return (
     <>
       <AdminHeader pageName={'Payment List'} />
-      <div className="container mt-5" style={{ width: '1200px', backgroundColor: '#EEEEEE' }}>
+      <div className="container mt-5 shadow rounded" style={{ width: '1200px', backgroundColor: '#EEEEEE' }}>
         <center>
           <div className="rounded-5 div-shadow mt-5 pb-4 example example1" style={{ width: '1180px', height: '450px', overflowY: 'scroll', backgroundColor: '#EEEEEE' }}>
             <table className="table-hover example1" style={{ width: '1090px', backgroundColor: '#EEEEEE' }}>

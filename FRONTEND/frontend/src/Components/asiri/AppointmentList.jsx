@@ -239,7 +239,7 @@ function AppointmentList() {
     <>
       <AdminHeader pageName={"Appointments"} />
       <div
-        className="container mt-5"
+        className="container mt-5 shadow rounded"
         style={{ width: "1200px", backgroundColor: "#EEEEEE" }}
       >
         {loading ? (
@@ -299,7 +299,8 @@ function AppointmentList() {
                           >
                             <option value="pending">Pending</option>
                             <option value="done">Done</option>
-                            <option value="canceled">Canceled</option>
+                            <option value="canceled">Payed</option>
+                            <option value = "rejected">Rejected</option>
                           </select>
                         ) : (
                           appointment.appointmentStatus
