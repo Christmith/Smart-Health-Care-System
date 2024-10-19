@@ -20,6 +20,7 @@ public class HospitalServiceReqTest {
                 .paymentOption(Arrays.asList(PaymentOption.CASH_PAYMENT, PaymentOption.CARD_PAYMENT))
                 .department("General Medicine")
                 .location("Building A")
+                .status(true)
                 .selectedDays(Arrays.asList("Monday", "Wednesday"))
                 .selectedDoctors(Arrays.asList("Dr. Smith", "Dr. Jones"))
                 .timeSlots(createTimeSlots())
@@ -94,6 +95,17 @@ public class HospitalServiceReqTest {
     @Test
     public void test_N_GetLocation() {
         assertThat(hospitalServiceReq.getLocation()).isNotEqualTo("Building B");
+    }
+
+    // Positive and Negative Test for status
+    @Test
+    public void test_P_GetStatus() {
+        assertThat(hospitalServiceReq.getStatus()).isEqualTo(true);
+    }
+
+    @Test
+    public void test_N_GetStatus() {
+        assertThat(hospitalServiceReq.getStatus()).isNotEqualTo(false);
     }
 
     // Positive and Negative Test for selectedDays
