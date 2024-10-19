@@ -1,114 +1,120 @@
 import React from "react";
+import AdminHeader from "../common/AdminHeader";
 
 function ServiceList() {
   return (
-    <div style={styles.container}>
-      <h1 style={styles.heading}>Healthcare Services</h1>
+    <>
+      <AdminHeader pageName={"Services"} />
+      <div style={styles.container}>
+        <h1 style={styles.heading}>Healthcare Services</h1>
 
-      {/* Overview Cards */}
-      <div style={styles.cardContainer}>
-        <div style={styles.card}>
-          <span
-            style={{ ...styles.statusDot, backgroundColor: "green" }}
-          ></span>
-          <h3 style={styles.cardTitle}>Newly Added Service</h3>
-          <p style={styles.cardText}>Acupuncture Service</p>
+        {/* Overview Cards */}
+        <div style={styles.cardContainer}>
+          <div style={styles.card}>
+            <span
+              style={{ ...styles.statusDot, backgroundColor: "green" }}
+            ></span>
+            <h3 style={styles.cardTitle}>Newly Added Service</h3>
+            <p style={styles.cardText}>Acupuncture Service</p>
+          </div>
+          <div style={styles.card}>
+            <span
+              style={{ ...styles.statusDot, backgroundColor: "red" }}
+            ></span>
+            <h3 style={styles.cardTitle}>Ongoing</h3>
+            <p style={styles.cardText}>15</p>
+          </div>
+          <div style={styles.card}>
+            <h3 style={styles.cardTitle}>Total Healthcare Services</h3>
+            <p style={styles.cardText}>45 💖</p>
+          </div>
+          <div style={styles.card}>
+            <h3 style={styles.cardTitle}>Most Utilized Service</h3>
+            <p style={styles.cardText}>Emergency Room Services</p>
+          </div>
         </div>
-        <div style={styles.card}>
-          <span style={{ ...styles.statusDot, backgroundColor: "red" }}></span>
-          <h3 style={styles.cardTitle}>Ongoing</h3>
-          <p style={styles.cardText}>15</p>
-        </div>
-        <div style={styles.card}>
-          <h3 style={styles.cardTitle}>Total Healthcare Services</h3>
-          <p style={styles.cardText}>45 💖</p>
-        </div>
-        <div style={styles.card}>
-          <h3 style={styles.cardTitle}>Most Utilized Service</h3>
-          <p style={styles.cardText}>Emergency Room Services</p>
-        </div>
-      </div>
 
-      {/* Filter Section */}
-      <div style={styles.filterContainer}>
-        <div style={styles.filterOptions}>
-          <select style={styles.filterSelect}>
-            <option>Status</option>
-          </select>
-          <select style={styles.filterSelect}>
-            <option>Department</option>
-          </select>
-          <input
-            type="text"
-            placeholder="Starting Hour"
-            style={styles.filterInput}
-          />
-          <input
-            type="text"
-            placeholder="Ending Hour"
-            style={styles.filterInput}
-          />
-          <input
-            type="text"
-            placeholder="Enter Keywords ..."
-            style={styles.filterInput}
-          />
-          <button style={styles.searchButton}>Search</button>
+        {/* Filter Section */}
+        <div style={styles.filterContainer}>
+          <div style={styles.filterOptions}>
+            <select style={styles.filterSelect}>
+              <option>Status</option>
+            </select>
+            <select style={styles.filterSelect}>
+              <option>Department</option>
+            </select>
+            <input
+              type="text"
+              placeholder="Starting Hour"
+              style={styles.filterInput}
+            />
+            <input
+              type="text"
+              placeholder="Ending Hour"
+              style={styles.filterInput}
+            />
+            <input
+              type="text"
+              placeholder="Enter Keywords ..."
+              style={styles.filterInput}
+            />
+            <button style={styles.searchButton}>Search</button>
+          </div>
+          <div style={styles.managementHeader}>
+            <h2 style={styles.managementHeading}>
+              Healthcare Service Management
+            </h2>
+            <button style={styles.addButton}>Add new service +</button>
+          </div>
         </div>
-        <div style={styles.managementHeader}>
-          <h2 style={styles.managementHeading}>
-            Healthcare Service Management
-          </h2>
-          <button style={styles.addButton}>Add new service +</button>
-        </div>
-      </div>
 
-      {/* Service Table */}
-      <table style={styles.table}>
-        <thead>
-          <tr>
-            <th style={styles.tableHeader}>Service Name</th>
-            <th style={styles.tableHeader}>Department</th>
-            <th style={styles.tableHeader}>Location</th>
-            <th style={styles.tableHeader}>Staff</th>
-            <th style={styles.tableHeader}>Available Days</th>
-            <th style={styles.tableHeader}>Available Hours</th>
-            <th style={styles.tableHeader}>Status</th>
-            <th style={styles.tableHeader}>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {dummyData.map((service, index) => (
-            <tr
-              key={index}
-              style={service.status === "Inactive" ? styles.inactiveRow : {}}
-            >
-              <td style={styles.tableCell}>{service.name}</td>
-              <td style={styles.tableCell}>{service.department}</td>
-              <td style={styles.tableCell}>{service.location}</td>
-              <td style={styles.tableCell}>{service.staff}</td>
-              <td style={styles.tableCell}>{service.availableDays}</td>
-              <td style={styles.tableCell}>{service.availableHours}</td>
-              <td style={styles.tableCell}>
-                <span
-                  style={
-                    service.status === "Active"
-                      ? styles.activeStatus
-                      : styles.inactiveStatus
-                  }
-                >
-                  {service.status}
-                </span>
-              </td>
-              <td style={styles.tableCell}>
-                <button style={styles.actionButton}>✏️</button>
-                <button style={styles.actionButton}>🗑️</button>
-              </td>
+        {/* Service Table */}
+        <table style={styles.table}>
+          <thead>
+            <tr>
+              <th style={styles.tableHeader}>Service Name</th>
+              <th style={styles.tableHeader}>Department</th>
+              <th style={styles.tableHeader}>Location</th>
+              <th style={styles.tableHeader}>Staff</th>
+              <th style={styles.tableHeader}>Available Days</th>
+              <th style={styles.tableHeader}>Available Hours</th>
+              <th style={styles.tableHeader}>Status</th>
+              <th style={styles.tableHeader}>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {dummyData.map((service, index) => (
+              <tr
+                key={index}
+                style={service.status === "Inactive" ? styles.inactiveRow : {}}
+              >
+                <td style={styles.tableCell}>{service.name}</td>
+                <td style={styles.tableCell}>{service.department}</td>
+                <td style={styles.tableCell}>{service.location}</td>
+                <td style={styles.tableCell}>{service.staff}</td>
+                <td style={styles.tableCell}>{service.availableDays}</td>
+                <td style={styles.tableCell}>{service.availableHours}</td>
+                <td style={styles.tableCell}>
+                  <span
+                    style={
+                      service.status === "Active"
+                        ? styles.activeStatus
+                        : styles.inactiveStatus
+                    }
+                  >
+                    {service.status}
+                  </span>
+                </td>
+                <td style={styles.tableCell}>
+                  <button style={styles.actionButton}>✏️</button>
+                  <button style={styles.actionButton}>🗑️</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }
 
@@ -137,6 +143,7 @@ const dummyData = [
 const styles = {
   container: {
     padding: "20px",
+    marginTop: "40px",
     margin: "0 auto",
     maxWidth: "1200px",
     fontFamily: "Arial, sans-serif",

@@ -113,7 +113,7 @@
 //                     ) : (
 //                       <>
 //                         <button className="btn btn-warning me-2" onClick={() => setEditableAppointmentId(appointment.appointmentId)}>
-//                           Edit 
+//                           Edit
 //                         </button>
 //                         <button className="btn btn-danger" onClick={() => handleDelete(appointment.appointmentId)}>
 //                           Delete
@@ -165,9 +165,6 @@
 
 // export default AppointmentList;
 
-
-
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AdminHeader from "../common/AdminHeader";
@@ -192,7 +189,8 @@ function AppointmentList() {
         setAppointments(response.data);
         const initialStatuses = {};
         response.data.forEach((appointment) => {
-          initialStatuses[appointment.appointmentId] = appointment.appointmentStatus;
+          initialStatuses[appointment.appointmentId] =
+            appointment.appointmentStatus;
         });
         setStatus(initialStatuses); // Set initial status values
         setLoading(false); // Set loading to false when data is fetched
@@ -237,11 +235,9 @@ function AppointmentList() {
       });
   };
 
-
-
   return (
     <>
-      <AdminHeader pageName={"Dashboard"} />
+      <AdminHeader pageName={"Appointments"} />
       <div
         className="container mt-5"
         style={{ width: "1200px", backgroundColor: "#EEEEEE" }}
@@ -297,7 +293,9 @@ function AppointmentList() {
                           <select
                             className="form-control"
                             value={status[appointment.appointmentId]}
-                            onChange={(e) => handleStatusChange(e, appointment.appointmentId)}
+                            onChange={(e) =>
+                              handleStatusChange(e, appointment.appointmentId)
+                            }
                           >
                             <option value="pending">Pending</option>
                             <option value="done">Done</option>
@@ -312,7 +310,9 @@ function AppointmentList() {
                           <>
                             <button
                               className="btn btn-success me-2"
-                              onClick={() => handleUpdate(appointment.appointmentId)}
+                              onClick={() =>
+                                handleUpdate(appointment.appointmentId)
+                              }
                             >
                               Save
                             </button>
@@ -327,13 +327,19 @@ function AppointmentList() {
                           <>
                             <button
                               className="btn btn-warning me-2"
-                              onClick={() => setEditableAppointmentId(appointment.appointmentId)}
+                              onClick={() =>
+                                setEditableAppointmentId(
+                                  appointment.appointmentId
+                                )
+                              }
                             >
                               Edit
                             </button>
                             <button
                               className="btn btn-danger"
-                              onClick={() => handleDelete(appointment.appointmentId)}
+                              onClick={() =>
+                                handleDelete(appointment.appointmentId)
+                              }
                             >
                               Delete
                             </button>
