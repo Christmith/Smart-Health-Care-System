@@ -30,7 +30,7 @@ public class Appointment {
     @DocumentReference
     private Customer patientId;
 
-    @NonNull
+    @NonNull    
 //    @DBRef
     @DocumentReference
     private HospitalService serviceId;
