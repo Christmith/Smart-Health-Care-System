@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -23,9 +24,17 @@ public class HospitalServiceServiceImpl implements HospitalServiceService {
     private final HospitalServiceRepository hospitalServiceRepository;
     private final DoctorRepository doctorRepository;
 
-    // Create a new service
     @Override
     public void createService(HospitalServiceReq hospitalServiceReq) {
+        // Check if the selected doctors exist
+        for (String doctorId : hospitalServiceReq.getSelectedDoctors()) {
+            Optional<Doctor> doctorOptional = doctorRepository.findById(doctorId);
+            if (doctorOptional.isEmpty()) {
+                // If the doctor is not found, throw a specific exception
+                throw new RuntimeException("Doctor not found");
+            }
+        }
+
         try {
             // Step 1: Create and save the HospitalService
             HospitalService hospitalService = HospitalService.builder()
@@ -53,6 +62,7 @@ public class HospitalServiceServiceImpl implements HospitalServiceService {
             throw new RuntimeException("Unexpected error: Failed to create service");
         }
     }
+
 
     // Helper method to update doctor's workingDays based on the time slots
     private void updateDoctorsWorkingDays(Map<String, List<Map<String, String>>> timeSlots) {
@@ -170,7 +180,6 @@ public class HospitalServiceServiceImpl implements HospitalServiceService {
         }
     }
 
-    // Get service by id
     @Override
     public HospitalServiceRes getServiceById(String id) {
         try {
@@ -180,11 +189,15 @@ public class HospitalServiceServiceImpl implements HospitalServiceService {
         } catch (DataAccessException e) {
             log.error("Database error while fetching service by id: {}", e.getMessage());
             throw new RuntimeException("Database error: Failed to fetch service by id");
+        } catch (RuntimeException e) {
+            log.error("Error while fetching service by id: {}", e.getMessage());
+            throw e; // rethrow the exception for handling in test
         } catch (Exception e) {
             log.error("Unexpected error while fetching service by id: {}", e.getMessage());
             throw new RuntimeException("Unexpected error: Failed to fetch service by id");
         }
     }
+
 
     // Delete service
     @Override

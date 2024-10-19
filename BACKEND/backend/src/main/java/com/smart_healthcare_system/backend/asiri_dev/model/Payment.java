@@ -16,7 +16,6 @@ public class Payment {
     private paymentCategory paymentCategory;
     private int paymentAmount;
     private PaymentType paymentType;
-    @NonNull
     private String cardholderName;
     private String cardNumber;
     private String expiryDate;

@@ -44,7 +44,7 @@ export default function SideBar({ page, menu, user }) {
                 width: "300px",
                 minHeight: "100vh",
                 position: "fixed",
-                backgroundColor: "#1DB954",
+                backgroundColor: "#333333",
             }}
         >
             <Link
@@ -54,8 +54,8 @@ export default function SideBar({ page, menu, user }) {
                 <img
                     width="60"
                     height="60"
-                    style={{ objectFit: "cover" }}
-                    src={DELogo}
+                    style={{ objectFit: "cover",borderRadius: "50%" }}
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1r104bamd1_kCdG3cElkuPL7N3HJjjw1frNaE46aWp8tX2EjLvxCiFhzK2rYVm9OiThw&usqp=CAU"
                     alt="Company Logo"
                 />
             </Link>
