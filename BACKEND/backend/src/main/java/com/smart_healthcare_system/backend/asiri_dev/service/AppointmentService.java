@@ -39,24 +39,6 @@ public class AppointmentService {
 
 
     public AppointmentResponse mapToAppointmentResponse(Appointment appointment) {
-//        // Fetch patient data using patientId from appointment
-//        Optional<Customer> patientOptional = patientRepository.findById(appointment.getPatientId());
-//        PatientResponse patientResponse = patientOptional.map(patient -> PatientResponse.builder()
-//                .patientId(patient.getCustomerId())
-//                .fullName(patient.getFullName())
-//                .phoneNumber(patient.getPhoneNumber())
-//                .email(patient.getEmail())
-//                .bloodType(patient.getBloodType())
-//                .build()).orElse(null);
-//
-//        // Fetch doctor data using doctorId from appointment
-//        Optional<Doctor> doctorOptional = doctorRes.findById(appointment.getDoctorId());
-//        DoctorResponse doctorResponse = doctorOptional.map(doctor -> DoctorResponse.builder()
-//                .doctorId(doctor.getDoctorId())
-//                .doctorName(doctor.getDoctorName())
-//                .doctorSpecialization(doctor.getDoctorSpecialization())
-//                .doctorRegNo(doctor.getDoctorRegNo())
-//                .build()).orElse(null);
 
         // Map all data into AppointmentResponse DTO
         return AppointmentResponse.builder()
@@ -85,5 +67,16 @@ public class AppointmentService {
 
         log.info("Appointment status updated to: {}", newStatus);
     }
+
+    public void deleteAppointment(String appointmentId){
+        if(appointmentRepository.existsById(appointmentId)){
+            appointmentRepository.deleteById(appointmentId);
+            log.info("Appointment Deleted");
+        }
+        else{
+            throw new ResponseStatusException(NOT_FOUND,"Appointment not found");
+        }
+    }
+
 
 }
