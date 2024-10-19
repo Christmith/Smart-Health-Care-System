@@ -22,6 +22,7 @@ class HospitalServiceTest {
                 .paymentOption(Arrays.asList(PaymentOption.CASH_PAYMENT, PaymentOption.CARD_PAYMENT))
                 .department("Cardiology Department")
                 .location("Building A")
+                .status(true)
                 .selectedDays(Arrays.asList("Monday", "Wednesday", "Friday"))
                 .selectedDoctors(Arrays.asList("Dr. Smith", "Dr. Adams"))
                 .timeSlots(new HashMap<>())
@@ -96,6 +97,17 @@ class HospitalServiceTest {
     @Test
     void test_N_GetLocation() {
         assertThat(hospitalService.getLocation()).isNotEqualTo("Building B");
+    }
+
+    // Positive and Negative Test for status
+    @Test
+    void test_P_GetStatus() {
+        assertThat(hospitalService.getStatus()).isEqualTo(true);
+    }
+
+    @Test
+    void test_N_GetStatus() {
+        assertThat(hospitalService.getStatus()).isNotEqualTo(false);
     }
 
     // Positive and Negative Test for selectedDays
@@ -187,6 +199,7 @@ class HospitalServiceTest {
                 .paymentOption(Arrays.asList(PaymentOption.CASH_PAYMENT, PaymentOption.CARD_PAYMENT))
                 .department("Cardiology Department")
                 .location("Building A")
+                .status(true)
                 .selectedDays(Arrays.asList("Monday", "Wednesday", "Friday"))
                 .selectedDoctors(Arrays.asList("Dr. Smith", "Dr. Adams"))
                 .timeSlots(new HashMap<>())
