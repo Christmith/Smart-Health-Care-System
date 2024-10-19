@@ -11,7 +11,6 @@ import com.smart_healthcare_system.backend.yohan_dev.repository.HospitalServiceR
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -43,6 +42,7 @@ public class HospitalServiceServiceImpl implements HospitalServiceService {
                     .paymentOption(hospitalServiceReq.getPaymentOption())
                     .department(hospitalServiceReq.getDepartment())
                     .location(hospitalServiceReq.getLocation())
+                    .status(true)
                     .selectedDays(hospitalServiceReq.getSelectedDays())
                     .selectedDoctors(hospitalServiceReq.getSelectedDoctors())
                     .timeSlots(hospitalServiceReq.getTimeSlots())
@@ -101,6 +101,7 @@ public class HospitalServiceServiceImpl implements HospitalServiceService {
                     .paymentOption(hospitalServiceReq.getPaymentOption())
                     .department(hospitalServiceReq.getDepartment())
                     .location(hospitalServiceReq.getLocation())
+                    .status(hospitalServiceReq.getStatus())
                     .selectedDays(hospitalServiceReq.getSelectedDays())
                     .selectedDoctors(hospitalServiceReq.getSelectedDoctors())
                     .timeSlots(hospitalServiceReq.getTimeSlots())
@@ -250,6 +251,7 @@ public class HospitalServiceServiceImpl implements HospitalServiceService {
                 .paymentOption(hospitalService.getPaymentOption())
                 .department(hospitalService.getDepartment())
                 .location(hospitalService.getLocation())
+                .status(hospitalService.getStatus())
                 .selectedDays(hospitalService.getSelectedDays())
                 .selectedDoctors(hospitalService.getSelectedDoctors())
                 .timeSlots(hospitalService.getTimeSlots())
