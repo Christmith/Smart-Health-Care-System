@@ -152,53 +152,56 @@ export default function AdminPanel() {
   return (
     <div className="adminPanelContainer" style={adminPanelContainerStyle}>
       {/* Sidebar */}
-      <div style={sidebarStyle}>
-        {/* Add healthcare image and admin details to the top */}
-        <div style={adminInfoStyle}>
-          <img
-            src="https://cms-assets.tutsplus.com/uploads/users/810/profiles/19338/profileImage/profile-square-extra-small.png"
-            alt="Healthcare"
-            style={imageStyle}
-          />
-          <div style={adminTextStyle}>
-            <h2 style={adminNameStyle}>Asiri Alwis</h2>
-            <p style={adminPositionStyle}>Super Admin</p>
-          </div>
-        </div>
+      {/*       <div style={sidebarStyle}> */}
+      {/*          */}
+      {/* Add healthcare image and admin details to the top */}
+      {/*         <div style={adminInfoStyle}> */}
+      {/*           <img */}
+      {/*             src="https://cms-assets.tutsplus.com/uploads/users/810/profiles/19338/profileImage/profile-square-extra-small.png" */}
+      {/*             alt="Healthcare" */}
+      {/*             style={imageStyle} */}
+      {/*           /> */}
+      {/*           <div style={adminTextStyle}> */}
+      {/*             <h2 style={adminNameStyle}>Asiri Alwis</h2> */}
+      {/*             <p style={adminPositionStyle}>Super Admin</p> */}
+      {/*           </div> */}
+      {/*         </div> */}
 
-        {/* Admin Panel heading and horizontal line */}
-        <h3 style={headingStyle}>Admin Panel</h3>
-        <hr style={{ border: "1px solid #fff", width: "100%" }} />
+      {/*          */}
+      {/* Admin Panel heading and horizontal line */}
+      {/*         <h3 style={headingStyle}>Admin Panel</h3> */}
+      {/*         <hr style={{ border: "1px solid #fff", width: "100%" }} /> */}
 
-        {/* Navigation Links */}
-        <nav>
-          <Link to={"/admin"} style={linkStyle}>
-            <FontAwesomeIcon
-              icon={faDashboard}
-              style={{ marginRight: "10px" }}
-            />
-            Dashboard
-          </Link>
-          <Link to={"payment/dashboard"} style={linkStyle}>
-            <FontAwesomeIcon
-              icon={faClipboardList}
-              style={{ marginRight: "10px" }}
-            />
-            Appointments
-          </Link>
-          <Link to={"payment/dashboard"} style={linkStyle}>
-            <FontAwesomeIcon
-              icon={faCreditCard}
-              style={{ marginRight: "10px" }}
-            />
-            Payments
-          </Link>
-          <Link to={"service/servicelist"} style={linkStyle}>
-            <FontAwesomeIcon icon={faCogs} style={{ marginRight: "10px" }} />
-            Services
-          </Link>
-        </nav>
-      </div>
+      {/*          */}
+      {/* Navigation Links */}
+      {/*         <nav> */}
+      {/*           <Link to={"/admin"} style={linkStyle}> */}
+      {/*             <FontAwesomeIcon */}
+      {/*               icon={faDashboard} */}
+      {/*               style={{ marginRight: "10px" }} */}
+      {/*             /> */}
+      {/*             Dashboard */}
+      {/*           </Link> */}
+      {/*           <Link to={"payment/dashboard"} style={linkStyle}> */}
+      {/*             <FontAwesomeIcon */}
+      {/*               icon={faClipboardList} */}
+      {/*               style={{ marginRight: "10px" }} */}
+      {/*             /> */}
+      {/*             Appointments */}
+      {/*           </Link> */}
+      {/*           <Link to={"payment/dashboard"} style={linkStyle}> */}
+      {/*             <FontAwesomeIcon */}
+      {/*               icon={faCreditCard} */}
+      {/*               style={{ marginRight: "10px" }} */}
+      {/*             /> */}
+      {/*             Payments */}
+      {/*           </Link> */}
+      {/*           <Link to={"service/servicelist"} style={linkStyle}> */}
+      {/*             <FontAwesomeIcon icon={faCogs} style={{ marginRight: "10px" }} /> */}
+      {/*             Services */}
+      {/*           </Link> */}
+      {/*         </nav> */}
+      {/*       </div> */}
 
       {/* Main Content */}
       <div
