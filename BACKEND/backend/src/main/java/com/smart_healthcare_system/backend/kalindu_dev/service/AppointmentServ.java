@@ -2,6 +2,8 @@ package com.smart_healthcare_system.backend.kalindu_dev.service;
 
 //import com.smart_healthcare_system.backend.kalindu_dev.model.Appointment;
 //import org.bson.types.ObjectId;
+import com.smart_healthcare_system.backend.chamath_dev.model.Customer;
+import com.smart_healthcare_system.backend.chamath_dev.repository.CustomerRepository;
 import com.smart_healthcare_system.backend.kalindu_dev.model.Appointment;
 import com.smart_healthcare_system.backend.kalindu_dev.repository.AppointmentRepo;
 import org.bson.types.ObjectId;
@@ -25,10 +27,19 @@ public class AppointmentServ {
     @Autowired
     private AppointmentRepo appRepo;
 
+    @Autowired
+    private CustomerRepository cusRepo;
 
     public List<Appointment> getAppointments() {
 
         return appRepo.findAll();
+    }
+
+    public List<Appointment> getAllCusAppointments(String cusEmail) {
+        Customer patient = cusRepo.findByEmail(cusEmail).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Appointment not found"));
+
+        return appRepo.findByPatientId(new ObjectId(patient.getCustomerId()));
+
     }
 
     public Appointment getAppointmentById(String appid) {

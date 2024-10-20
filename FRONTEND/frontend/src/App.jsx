@@ -48,6 +48,7 @@ import CustomerLayout from "./components/common/CustomerLayout";
 import Profile from "./Components/chamath/Profile.jsx";
 import Appointments from "./Components/Kalindu/Appointments.jsx";
 import CustomerPayments from "./Components/asiri/CustomerPayments.jsx";
+import AddAppointment from "./Components/Kalindu/AddAppointment.jsx";
 import CustomerSignup from "./Components/chamath/customerSignup.jsx";
 
 function App() {
@@ -92,6 +93,10 @@ function App() {
           <Route path="user/" element={<Profile />} />
           <Route path="user/patient/profile" element={<Profile />} />
           <Route path="user/patient/appointments" element={<Appointments />} />
+          <Route
+            path="user/patient/appointments/add"
+            element={<AddAppointment />}
+          />
           <Route path="user/patient/payments" element={<PaymentCard />} />
         </Route>
 
