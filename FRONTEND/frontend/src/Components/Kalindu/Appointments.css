@@ -1,0 +1,47 @@
+/*Common*/
+.div-shadow {
+  box-shadow: 0px 16px 40px 2px rgba(0, 0, 0, 0.2);
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.flex {
+  display: flex;
+}
+
+.inline-b {
+  display: inline-block;
+}
+
+/*Main Appointment Page*/
+.container {
+  max-height: 100vh;
+}
+
+.datepicker::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+.appointments-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 90vh;
+}
+
+/*Appointment Cards*/
+.appointments-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 60px 60px 60px 60px;
+  background-color: #fce4ec;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 20px;
+  min-height: 300px;
+  max-width: 450px;
+  font-size: 14px;
+}
