@@ -3,6 +3,7 @@ package com.smart_healthcare_system.backend.chamath_dev.controller;
 
 
 import com.smart_healthcare_system.backend.chamath_dev.dto.CustomerRequest;
+import com.smart_healthcare_system.backend.chamath_dev.dto.CustomerUpdateRequest;
 import com.smart_healthcare_system.backend.chamath_dev.dto.CustomerResponse;
 import com.smart_healthcare_system.backend.chamath_dev.service.CustomerService;
 import lombok.RequiredArgsConstructor;
@@ -33,8 +34,8 @@ public class CustomerController {
     // Update Customer by Email
     @PutMapping("/{email}")
     @ResponseStatus(HttpStatus.OK)
-    public void updateCustomer(@PathVariable String email, @RequestBody CustomerRequest customerRequest) {
-        customerService.updateCustomer(email, customerRequest);
+    public void updateCustomer(@PathVariable String email, @RequestBody CustomerUpdateRequest customerUpdateRequest) {
+        customerService.updateCustomer(email, customerUpdateRequest);
     }
 
     // Delete Customer by Email

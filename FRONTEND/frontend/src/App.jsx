@@ -49,6 +49,7 @@ import Profile from "./Components/chamath/Profile.jsx";
 import Appointments from "./Components/Kalindu/Appointments.jsx";
 import CustomerPayments from "./Components/asiri/CustomerPayments.jsx";
 import AddAppointment from "./Components/Kalindu/AddAppointment.jsx";
+import CustomerSignup from "./Components/chamath/customerSignup.jsx";
 
 function App() {
   return (

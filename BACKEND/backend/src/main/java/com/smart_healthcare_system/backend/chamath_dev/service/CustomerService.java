@@ -1,6 +1,7 @@
 package com.smart_healthcare_system.backend.chamath_dev.service;
 
 import com.smart_healthcare_system.backend.chamath_dev.dto.CustomerRequest;
+import com.smart_healthcare_system.backend.chamath_dev.dto.CustomerUpdateRequest;
 import com.smart_healthcare_system.backend.chamath_dev.dto.CustomerResponse;
 import com.smart_healthcare_system.backend.chamath_dev.model.Customer;
 import com.smart_healthcare_system.backend.chamath_dev.repository.CustomerRepository;
@@ -59,23 +60,21 @@ public class CustomerService {
     }
 
     // Update Customer by Email
-    public void updateCustomer(String email, CustomerRequest customerRequest) {
+    public void updateCustomer(String email, CustomerUpdateRequest customerUpdateRequest) {
         try {
             Customer existingCustomer = customerRepository.findByEmail(email)
                     .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Customer not found"));
 
-            existingCustomer.setFullName(customerRequest.getFullName());
-            existingCustomer.setDateOfBirth(customerRequest.getDateOfBirth());
-            existingCustomer.setGender(customerRequest.getGender());
-            existingCustomer.setPhoneNumber(customerRequest.getPhoneNumber());
-            existingCustomer.setEmergencyContact(customerRequest.getEmergencyContact());
-            existingCustomer.setNicNumber(customerRequest.getNicNumber());
-            existingCustomer.setMedicalHistory(customerRequest.getMedicalHistory());
-            existingCustomer.setAllergies(customerRequest.getAllergies());
-            existingCustomer.setBloodType(customerRequest.getBloodType());
-            existingCustomer.setPreviousTreatments(customerRequest.getPreviousTreatments());
+            existingCustomer.setFullName(customerUpdateRequest.getFullName());
+            existingCustomer.setDateOfBirth(customerUpdateRequest.getDateOfBirth());
+            existingCustomer.setPhoneNumber(customerUpdateRequest.getPhoneNumber());
+            existingCustomer.setEmergencyContact(customerUpdateRequest.getEmergencyContact());
+            existingCustomer.setNicNumber(customerUpdateRequest.getNicNumber());
+            existingCustomer.setMedicalHistory(customerUpdateRequest.getMedicalHistory());
+            existingCustomer.setAllergies(customerUpdateRequest.getAllergies());
+            existingCustomer.setPreviousTreatments(customerUpdateRequest.getPreviousTreatments());
             // Ensure to hash the password if updating it
-            existingCustomer.setPassword(customerRequest.getPassword());
+
 
             customerRepository.save(existingCustomer);
             log.info("Customer {} is updated.", email);
