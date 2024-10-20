@@ -36,7 +36,7 @@
 
 import { useState } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import AdminLayout from "./components/common/AdminLayout";
+import AdminLayout from "./Components/common/AdminLayout.jsx";
 import AdminPanel from "./Components/common/AdminPanel.jsx";
 import PaymentCard from "./Components/asiri/PaymentCard.jsx";
 import PayList from "./Components/asiri/PayList.jsx";
@@ -99,6 +99,19 @@ function App() {
           <Route path="user/patient/appointments" element={<Appointments />} />
           <Route path="user/patient/payments" element={<PaymentCard />} />
         </Route>
+        <Route
+          element={
+            <CustomerLayout
+              page={"patient"}
+              menu={["Profile", "Appointments", "Payments"]}
+            ></CustomerLayout>
+          }
+        >
+          <Route path="user/" element={<Profile />} />
+          <Route path="user/patient/profile" element={<Profile />} />
+          <Route path="user/patient/appointments" element={<Appointments />} />
+          <Route path="user/patient/payments" element={<PaymentCard />} />
+        </Route>
 
         {/*<Route*/}
         {/*    element={*/}
@@ -111,7 +124,28 @@ function App() {
         {/*    <Route path="admin/bin/customers" element={<Customers />} />*/}
         {/*    <Route path="admin/bin/schedules" element={<Schedules />} />*/}
         {/*</Route>*/}
+        {/*<Route*/}
+        {/*    element={*/}
+        {/*        <AdminLayout*/}
+        {/*            page={"Bin"}*/}
+        {/*            menu={["Customers", "Schedules"]}*/}
+        {/*        ></AdminLayout>*/}
+        {/*    }*/}
+        {/*>*/}
+        {/*    <Route path="admin/bin/customers" element={<Customers />} />*/}
+        {/*    <Route path="admin/bin/schedules" element={<Schedules />} />*/}
+        {/*</Route>*/}
 
+        {/*<Route*/}
+        {/*    element={*/}
+        {/*        <AdminLayout page={"Profile"} menu={["Report"]}></AdminLayout>*/}
+        {/*    }*/}
+        {/*>*/}
+        {/*    <Route path="admin/profile/report" element={<ProfileReport />} />*/}
+        {/*</Route>*/}
+      </Routes>
+    </BrowserRouter>
+  );
         {/*<Route*/}
         {/*    element={*/}
         {/*        <AdminLayout page={"Profile"} menu={["Report"]}></AdminLayout>*/}

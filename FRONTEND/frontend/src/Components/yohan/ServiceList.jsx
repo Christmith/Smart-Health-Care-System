@@ -260,6 +260,7 @@ function ServiceList() {
 const styles = {
   container: {
     padding: "20px",
+    marginTop: "40px",
     margin: "0 auto",
     maxWidth: "1200px",
     fontFamily: "Arial, sans-serif",
