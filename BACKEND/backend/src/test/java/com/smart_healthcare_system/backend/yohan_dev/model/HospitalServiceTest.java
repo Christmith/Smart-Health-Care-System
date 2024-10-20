@@ -19,7 +19,7 @@ class HospitalServiceTest {
                 .serviceId("1")
                 .serviceName("Cardiology Service")
                 .serviceDescription("Provides heart-related services")
-                .paymentOption(Arrays.asList(PaymentOption.CASH_PAYMENT, PaymentOption.CARD_PAYMENT))
+                .paymentOption(Arrays.asList(PaymentOption.Cash, PaymentOption.Card))
                 .department("Cardiology Department")
                 .location("Building A")
                 .status(true)
@@ -67,13 +67,13 @@ class HospitalServiceTest {
     // Positive and Negative Test for paymentOption
     @Test
     void test_P_GetPaymentOption() {
-        List<PaymentOption> expectedPaymentOptions = Arrays.asList(PaymentOption.CASH_PAYMENT, PaymentOption.CARD_PAYMENT);
+        List<PaymentOption> expectedPaymentOptions = Arrays.asList(PaymentOption.Cash, PaymentOption.Card);
         assertThat(hospitalService.getPaymentOption()).isEqualTo(expectedPaymentOptions);
     }
 
     @Test
     void test_N_GetPaymentOption() {
-        List<PaymentOption> incorrectPaymentOptions = Arrays.asList(PaymentOption.CASH_PAYMENT, PaymentOption.INSURANCE_PAYMENT);
+        List<PaymentOption> incorrectPaymentOptions = Arrays.asList(PaymentOption.Cash, PaymentOption.Insurance);
         assertThat(hospitalService.getPaymentOption()).isNotEqualTo(incorrectPaymentOptions);
     }
 
@@ -196,7 +196,7 @@ class HospitalServiceTest {
                 .serviceId("1")
                 .serviceName("Cardiology Service")
                 .serviceDescription("Provides heart-related services")
-                .paymentOption(Arrays.asList(PaymentOption.CASH_PAYMENT, PaymentOption.CARD_PAYMENT))
+                .paymentOption(Arrays.asList(PaymentOption.Cash, PaymentOption.Card))
                 .department("Cardiology Department")
                 .location("Building A")
                 .status(true)
