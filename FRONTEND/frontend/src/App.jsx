@@ -34,10 +34,6 @@
 //
 // export default App
 
-
-
-
-
 import { useState } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import AdminLayout from "./components/common/AdminLayout";
@@ -52,72 +48,80 @@ import CustomerLayout from "./components/common/CustomerLayout";
 import Profile from "./Components/chamath/Profile.jsx";
 import Appointments from "./Components/Kalindu/Appointments.jsx";
 import CustomerPayments from "./Components/asiri/CustomerPayments.jsx";
-
-
-
+import AddNewService from "./Components/yohan/AddNewService.jsx";
+import ServiceDetails from "./Components/yohan/ServiceDetails.jsx";
 
 function App() {
-    return (
-        <BrowserRouter>
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Pay />} />
+        <Route path="/admin" element={<AdminPanel />} />
+        <Route
+          element={
+            <AdminLayout
+              page={"Payment"}
+              menu={["Dashboard", "Recived Payments", "Appointments"]}
+            ></AdminLayout>
+          }
+        >
+          <Route path="admin/payment/dashboard" element={<Dashboard />} />
+          <Route path="admin/payment/recivedpayments" element={<PayList />} />
+          <Route
+            path="admin/payment/appointments"
+            element={<AppointmentList />}
+          />
+        </Route>
 
-            <Routes>
-                <Route path="/" element={<Pay/>} />
-                <Route path="/admin" element={<AdminPanel />} />
-                <Route
-                    element={
-                        <AdminLayout page={"Payment"} menu={["Dashboard","Recived Payments" , "Appointments"]}></AdminLayout>
-                    }
-                >
-                    <Route path="admin/payment/dashboard" element= {<Dashboard />}/>
-                    <Route path="admin/payment/recivedpayments" element= {<PayList />}/>
-                    <Route path="admin/payment/appointments" element= {<AppointmentList />}/>
-                    
-                </Route>
+        <Route
+          element={
+            <AdminLayout page={"Service"} menu={["Service List"]}></AdminLayout>
+          }
+        >
+          <Route path="admin/service/servicelist" element={<ServiceList />} />
+          <Route
+            path="admin/service/addnewservice"
+            element={<AddNewService />}
+          />
+          <Route path="admin/service/:serviceId" element={<ServiceDetails />} />
+        </Route>
 
-                <Route
-                    element={
-                        <AdminLayout page={"Service"} menu={["Service List"]}></AdminLayout>
-                    }
-                >
-                    <Route path="admin/service/servicelist" element= {<ServiceList />}/>
-                    
-                </Route>
+        <Route
+          element={
+            <CustomerLayout
+              page={"patient"}
+              menu={["Profile", "Appointments", "Payments"]}
+            ></CustomerLayout>
+          }
+        >
+          <Route path="user/" element={<Profile />} />
+          <Route path="user/patient/profile" element={<Profile />} />
+          <Route path="user/patient/appointments" element={<Appointments />} />
+          <Route path="user/patient/payments" element={<PaymentCard />} />
+        </Route>
 
-                <Route
-                    element={
-                        <CustomerLayout page={"patient"} menu={["Profile", "Appointments", "Payments"]}></CustomerLayout>
-                    }
-                >
-                    <Route path="user/" element= {<Profile />}/>
-                    <Route path="user/patient/profile" element= {<Profile />}/>
-                    <Route path="user/patient/appointments" element= {<Appointments />}/>
-                    <Route path="user/patient/payments" element= {<PaymentCard />}/>
+        {/*<Route*/}
+        {/*    element={*/}
+        {/*        <AdminLayout*/}
+        {/*            page={"Bin"}*/}
+        {/*            menu={["Customers", "Schedules"]}*/}
+        {/*        ></AdminLayout>*/}
+        {/*    }*/}
+        {/*>*/}
+        {/*    <Route path="admin/bin/customers" element={<Customers />} />*/}
+        {/*    <Route path="admin/bin/schedules" element={<Schedules />} />*/}
+        {/*</Route>*/}
 
-                </Route>
-
-
-                {/*<Route*/}
-                {/*    element={*/}
-                {/*        <AdminLayout*/}
-                {/*            page={"Bin"}*/}
-                {/*            menu={["Customers", "Schedules"]}*/}
-                {/*        ></AdminLayout>*/}
-                {/*    }*/}
-                {/*>*/}
-                {/*    <Route path="admin/bin/customers" element={<Customers />} />*/}
-                {/*    <Route path="admin/bin/schedules" element={<Schedules />} />*/}
-                {/*</Route>*/}
-
-                {/*<Route*/}
-                {/*    element={*/}
-                {/*        <AdminLayout page={"Profile"} menu={["Report"]}></AdminLayout>*/}
-                {/*    }*/}
-                {/*>*/}
-                {/*    <Route path="admin/profile/report" element={<ProfileReport />} />*/}
-                {/*</Route>*/}
-            </Routes>
-        </BrowserRouter>
-    );
+        {/*<Route*/}
+        {/*    element={*/}
+        {/*        <AdminLayout page={"Profile"} menu={["Report"]}></AdminLayout>*/}
+        {/*    }*/}
+        {/*>*/}
+        {/*    <Route path="admin/profile/report" element={<ProfileReport />} />*/}
+        {/*</Route>*/}
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
