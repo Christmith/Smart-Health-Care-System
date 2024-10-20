@@ -1,0 +1,63 @@
+/* Profile Page Styling */
+.profile-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem; /* Decreased further */
+    height: 100%;
+    
+}
+
+.profile-section {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    flex-basis: 32%; /* Ensures each section takes up about a third of the available width */
+     /* Remove any margin that could add extra space */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    overflow-y: auto; /* Enable scrolling if content is too tall */
+}
+
+.profile-picture {
+    text-align: center;
+}
+
+.profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+h4 {
+    margin-bottom: 15px;
+}
+
+.profile-section p {
+    margin: 5px 0;
+}
+
+.profile-section input,
+.profile-section textarea {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white; /* White background for inputs */
+    color: black; /* Black text color */
+}
+
+textarea {
+    resize: vertical;
+}
+
+.btn {
+    width: 100%;
+    margin-top: 15px;
+}

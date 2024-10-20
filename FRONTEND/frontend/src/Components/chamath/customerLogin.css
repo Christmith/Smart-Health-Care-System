@@ -1,0 +1,116 @@
+/* Center the login container on the page */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+/* Login container styling */
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Header styling */
+.login-header {
+    color: #00ADB5;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+/* Input field styling */
+.login-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+/* Input field focus state */
+.login-input:focus {
+    border-color: #00adb5;
+    box-shadow: 0 0 5px rgba(0, 173, 181, 0.5);
+    outline: none;
+}
+
+/* Submit button styling */
+.login-btn {
+    background-color: #00ADB5;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #ffffff;
+    border-radius: 5px;
+    width: 100%;
+    transition: all 0.4s ease;
+    margin-top: 20px;
+}
+
+/* Submit button hover and focus effects */
+.login-btn:hover,
+.login-btn:focus {
+    background-color: #ffffff;
+    color: #00adb5;
+    border: 2px solid #00adb5;
+}
+
+/* Error text for validation */
+.text-danger {
+    font-size: 0.875rem;
+    margin-top: 5px;
+}
+
+/* Add spacing between the form and the link */
+.mt-3 {
+    margin-top: 20px;
+}
+
+/* Link styling */
+a {
+    color: #00ADB5;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #007bff;
+}
+
+/* Add responsiveness for smaller devices */
+@media screen and (max-width: 768px) {
+    .login-container {
+        width: 90%;
+        padding: 20px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .login-header {
+        font-size: 1.2rem;
+    }
+
+    .login-input {
+        font-size: 0.9rem;
+    }
+
+    .login-btn {
+        font-size: 0.9rem;
+    }
+}
