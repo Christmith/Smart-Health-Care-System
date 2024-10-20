@@ -1,138 +1,261 @@
-import React from "react";
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { getAllServices } from "../../lib/hospitalServiceClient";
+import { getDepartments } from "../../lib/departmentClient";
 
 function ServiceList() {
+  const navigate = useNavigate();
+  const [services, setServices] = useState([]);
+  const [departments, setDepartments] = useState([]);
+  const [filteredServices, setFilteredServices] = useState([]);
+  const [departmentFilter, setDepartmentFilter] = useState("");
+  const [statusFilter, setStatusFilter] = useState("");
+  const [locationFilter, setLocationFilter] = useState("");
+  const [serviceNameFilter, setServiceNameFilter] = useState("");
+  const [newestService, setNewestService] = useState(null);
+  const [totalServices, setTotalServices] = useState(0);
+  const [ongoingServices, setOngoingServices] = useState(0);
+
+  // Fetch all services from the server
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const fetchResult = await getAllServices();
+        setServices(fetchResult);
+        setFilteredServices(fetchResult); // Initialize filtered services
+
+        // Calculate newest service, total services, and ongoing services
+        const total = fetchResult.length;
+        const ongoing = fetchResult.filter(
+          (service) => service.status === true
+        ).length;
+        const newest = fetchResult.reduce((latest, service) => {
+          return new Date(service.createdAt) > new Date(latest.createdAt)
+            ? service
+            : latest;
+        }, fetchResult[0]);
+
+        setTotalServices(total); // Set total services count
+        setOngoingServices(ongoing); // Set ongoing services count
+        setNewestService(newest.serviceName); // Set newest service
+      } catch (error) {
+        console.error("Error fetching services: ", error);
+      }
+    };
+    fetchServices();
+  }, []);
+
+  // Fetch all departments from the server
+  useEffect(() => {
+    const fetchDepartments = async () => {
+      try {
+        const fetchResult = await getDepartments();
+        setDepartments(fetchResult);
+      } catch (error) {
+        console.error("Error fetching departments: ", error);
+        throw error;
+      }
+    };
+    fetchDepartments();
+  }, []);
+
+  // Filter Reset - This function will clear both filter fields and filter states
+  const handleFilterReset = () => {
+    setDepartmentFilter("");
+    setStatusFilter("");
+    setLocationFilter("");
+    setServiceNameFilter("");
+
+    // Clear input fields by setting filtered services to the original unfiltered list
+    setFilteredServices(services);
+  };
+
+  // Filter services based on selected filters
+  useEffect(() => {
+    let filtered = services;
+
+    // Department filter
+    if (departmentFilter) {
+      filtered = filtered.filter(
+        (service) => service.department === departmentFilter
+      );
+    }
+
+    // Status filter
+    if (statusFilter) {
+      const isActive = statusFilter === "active";
+      filtered = filtered.filter((service) => service.status === isActive);
+    }
+
+    // Location filter - Fixed to use locationFilter instead of serviceNameFilter
+    if (locationFilter) {
+      filtered = filtered.filter((service) =>
+        service.location.toLowerCase().includes(locationFilter.toLowerCase())
+      );
+    }
+
+    // Service name filter
+    if (serviceNameFilter) {
+      filtered = filtered.filter((service) =>
+        service.serviceName
+          .toLowerCase()
+          .includes(serviceNameFilter.toLowerCase())
+      );
+    }
+
+    // Update the filtered services list
+    setFilteredServices(filtered);
+  }, [
+    departmentFilter,
+    statusFilter,
+    locationFilter,
+    serviceNameFilter,
+    services,
+  ]);
+
+  const handleAddServiceClick = () => {
+    navigate("/admin/service/addnewservice");
+  };
+
+  const handleViewClick = (serviceId) => {
+    navigate(`/admin/service/${serviceId}`);
+  };
+
   return (
-    <div style={styles.container}>
-      <h1 style={styles.heading}>Healthcare Services</h1>
-
-      {/* Overview Cards */}
-      <div style={styles.cardContainer}>
-        <div style={styles.card}>
-          <span
-            style={{ ...styles.statusDot, backgroundColor: "green" }}
-          ></span>
-          <h3 style={styles.cardTitle}>Newly Added Service</h3>
-          <p style={styles.cardText}>Acupuncture Service</p>
+    <>
+      <div style={styles.container}>
+        <h1 style={styles.heading}>Healthcare Services</h1>
+        {/* Overview Cards */}
+        <div style={styles.cardContainer}>
+          <div style={styles.card}>
+            <span
+              style={{ ...styles.statusDot, backgroundColor: "green" }}
+            ></span>
+            <h3 style={styles.cardTitle}>Newly Added Service</h3>
+            <p style={styles.cardText}>{newestService}</p>
+          </div>
+          <div style={styles.card}>
+            <span
+              style={{ ...styles.statusDot, backgroundColor: "red" }}
+            ></span>
+            <h3 style={styles.cardTitle}>Ongoing Services</h3>
+            <p style={styles.cardText}>{ongoingServices}</p>
+          </div>
+          <div style={styles.card}>
+            <h3 style={styles.cardTitle}>Total Healthcare Services</h3>
+            <p style={styles.cardText}>{totalServices} 💖</p>
+          </div>
+          <div style={styles.card}>
+            <h3 style={styles.cardTitle}>Most Utilized Service</h3>
+            <p style={styles.cardText}>Emergency Room Services</p>
+          </div>
         </div>
-        <div style={styles.card}>
-          <span style={{ ...styles.statusDot, backgroundColor: "red" }}></span>
-          <h3 style={styles.cardTitle}>Ongoing</h3>
-          <p style={styles.cardText}>15</p>
-        </div>
-        <div style={styles.card}>
-          <h3 style={styles.cardTitle}>Total Healthcare Services</h3>
-          <p style={styles.cardText}>45 💖</p>
-        </div>
-        <div style={styles.card}>
-          <h3 style={styles.cardTitle}>Most Utilized Service</h3>
-          <p style={styles.cardText}>Emergency Room Services</p>
-        </div>
-      </div>
-
-      {/* Filter Section */}
-      <div style={styles.filterContainer}>
-        <div style={styles.filterOptions}>
-          <select style={styles.filterSelect}>
-            <option>Status</option>
-          </select>
-          <select style={styles.filterSelect}>
-            <option>Department</option>
-          </select>
-          <input
-            type="text"
-            placeholder="Starting Hour"
-            style={styles.filterInput}
-          />
-          <input
-            type="text"
-            placeholder="Ending Hour"
-            style={styles.filterInput}
-          />
-          <input
-            type="text"
-            placeholder="Enter Keywords ..."
-            style={styles.filterInput}
-          />
-          <button style={styles.searchButton}>Search</button>
-        </div>
-        <div style={styles.managementHeader}>
-          <h2 style={styles.managementHeading}>
-            Healthcare Service Management
-          </h2>
-          <button style={styles.addButton}>Add new service +</button>
-        </div>
-      </div>
-
-      {/* Service Table */}
-      <table style={styles.table}>
-        <thead>
-          <tr>
-            <th style={styles.tableHeader}>Service Name</th>
-            <th style={styles.tableHeader}>Department</th>
-            <th style={styles.tableHeader}>Location</th>
-            <th style={styles.tableHeader}>Staff</th>
-            <th style={styles.tableHeader}>Available Days</th>
-            <th style={styles.tableHeader}>Available Hours</th>
-            <th style={styles.tableHeader}>Status</th>
-            <th style={styles.tableHeader}>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {dummyData.map((service, index) => (
-            <tr
-              key={index}
-              style={service.status === "Inactive" ? styles.inactiveRow : {}}
+        {/* Filter Section */}
+        <div style={styles.filterContainer}>
+          <div style={styles.filterOptions}>
+            <select
+              style={styles.filterSelect}
+              onChange={(e) => setDepartmentFilter(e.target.value)}
+              value={departmentFilter}
             >
-              <td style={styles.tableCell}>{service.name}</td>
-              <td style={styles.tableCell}>{service.department}</td>
-              <td style={styles.tableCell}>{service.location}</td>
-              <td style={styles.tableCell}>{service.staff}</td>
-              <td style={styles.tableCell}>{service.availableDays}</td>
-              <td style={styles.tableCell}>{service.availableHours}</td>
-              <td style={styles.tableCell}>
-                <span
-                  style={
-                    service.status === "Active"
-                      ? styles.activeStatus
-                      : styles.inactiveStatus
-                  }
+              <option value="">Department</option>
+              {departments.map((department) => (
+                <option
+                  key={department.departmentId}
+                  value={department.departmentName}
                 >
-                  {service.status}
-                </span>
-              </td>
-              <td style={styles.tableCell}>
-                <button style={styles.actionButton}>✏️</button>
-                <button style={styles.actionButton}>🗑️</button>
-              </td>
+                  {department.departmentName}
+                </option>
+              ))}
+            </select>
+            <select
+              style={styles.filterSelect}
+              onChange={(e) => setStatusFilter(e.target.value)}
+              value={statusFilter}
+            >
+              <option value="">Status</option>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+            <input
+              type="text"
+              placeholder="Location"
+              style={styles.filterInput}
+              onChange={(e) => setLocationFilter(e.target.value)}
+              value={locationFilter}
+            />
+            <input
+              type="text"
+              placeholder="Service Name"
+              style={styles.filterInput}
+              onChange={(e) => setServiceNameFilter(e.target.value)}
+              value={serviceNameFilter}
+            />
+            <button style={styles.searchButton} onClick={handleFilterReset}>
+              Reset
+            </button>
+          </div>
+          <div style={styles.managementHeader}>
+            <h2 style={styles.managementHeading}>
+              Healthcare Service Management
+            </h2>
+            <button style={styles.addButton} onClick={handleAddServiceClick}>
+              Add new service
+            </button>
+          </div>
+        </div>
+        {/* Service Table */}
+        <table style={styles.table}>
+          <thead>
+            <tr>
+              <th style={styles.tableHeader}>Service Name</th>
+              <th style={styles.tableHeader}>Department</th>
+              <th style={styles.tableHeader}>Location</th>
+              <th style={styles.tableHeader}>Payment Options</th>
+              <th style={styles.tableHeader}>Status</th>
+              <th style={styles.tableHeader}>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {filteredServices.map((service) => (
+              <tr
+                key={service.serviceId} // Use serviceId as the key for better identification
+                style={service.status === false ? styles.inactiveRow : {}}
+              >
+                <td style={styles.tableCell}>{service.serviceName}</td>
+                <td style={styles.tableCell}>{service.department}</td>
+                <td style={styles.tableCell}>{service.location}</td>
+                <td style={styles.tableCell}>
+                  {service.paymentOption.join(", ")}
+                </td>
+                <td style={styles.tableCell}>
+                  <span
+                    style={
+                      service.status
+                        ? styles.activeStatus
+                        : styles.inactiveStatus
+                    }
+                  >
+                    {service.status ? "Active" : "Inactive"}
+                  </span>
+                </td>
+                <td style={styles.tableCell}>
+                  <button
+                    style={styles.actionButton}
+                    onClick={() => handleViewClick(service.serviceId)}
+                  >
+                    View More
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }
-
-const dummyData = [
-  {
-    name: "Physical Therapy",
-    department: "Rehabilitation",
-    location: "A-12",
-    staff: "Dr. Priyantha, Ms. Wijecursiya",
-    availableDays: "Sun, Wed, Fri",
-    availableHours: "2pm - 4pm",
-    status: "Active",
-  },
-  {
-    name: "Pediatric Services",
-    department: "Pediatric",
-    location: "A-10",
-    staff: "Dr. Gawesh, RN. Hewage",
-    availableDays: "Mon, Wed, Fri, Sat",
-    availableHours: "4pm - 6:30pm",
-    status: "Inactive",
-  },
-  // Add more dummy data as needed
-];
 
 const styles = {
   container: {
@@ -145,7 +268,7 @@ const styles = {
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
   },
   heading: {
-    fontSize: "24px",
+    fontSize: "28px",
     fontWeight: "bold",
     marginBottom: "20px",
     textAlign: "left",
@@ -189,25 +312,38 @@ const styles = {
     gap: "10px",
     alignItems: "center",
     flexWrap: "wrap",
+    color: "#333",
   },
   filterSelect: {
     padding: "8px",
-    borderRadius: "5px",
-    border: "1px solid #ccc",
+    borderRadius: "8px",
+    border: "2px solid #333",
+    backgroundColor: "#fff",
+    color: "#333",
+    flex: "1",
+    minWidth: "150px",
+    maxWidth: "250px",
   },
   filterInput: {
     padding: "8px",
-    borderRadius: "5px",
-    border: "1px solid #ccc",
+    borderRadius: "8px",
+    border: "2px solid #333",
+    backgroundColor: "#fff",
     flex: "1",
+    minWidth: "150px",
+    maxWidth: "250px",
   },
   searchButton: {
     padding: "8px 12px",
     borderRadius: "5px",
-    backgroundColor: "#007bff",
+    backgroundColor: "#F87171",
     color: "#fff",
     border: "none",
     cursor: "pointer",
+    flex: "1",
+    minWidth: "150px",
+    maxWidth: "250px",
+    textAlign: "center",
   },
   managementHeader: {
     display: "flex",
@@ -220,12 +356,16 @@ const styles = {
     fontWeight: "bold",
   },
   addButton: {
-    backgroundColor: "#28a745",
-    color: "#fff",
     padding: "8px 12px",
-    border: "none",
     borderRadius: "5px",
+    backgroundColor: "green",
+    color: "#fff",
+    border: "none",
     cursor: "pointer",
+    flex: "1",
+    minWidth: "150px",
+    maxWidth: "227px",
+    textAlign: "center",
   },
   table: {
     width: "100%",
@@ -233,7 +373,7 @@ const styles = {
     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
   },
   tableHeader: {
-    backgroundColor: "#f1f1f1",
+    backgroundColor: "#FFE8E5",
     padding: "10px",
     textAlign: "left",
     fontWeight: "bold",
@@ -254,10 +394,14 @@ const styles = {
     backgroundColor: "#fce4e4",
   },
   actionButton: {
-    backgroundColor: "transparent",
-    border: "none",
+    margin: "0 5px",
+    padding: "10px 30px",
     cursor: "pointer",
-    marginRight: "5px",
+    backgroundColor: "#F87171",
+    color: "#fff",
+    border: "none",
+    borderRadius: "10px",
+    fontSize: "14px",
   },
 };
 
