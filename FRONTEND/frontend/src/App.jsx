@@ -146,16 +146,6 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
-        {/*<Route*/}
-        {/*    element={*/}
-        {/*        <AdminLayout page={"Profile"} menu={["Report"]}></AdminLayout>*/}
-        {/*    }*/}
-        {/*>*/}
-        {/*    <Route path="admin/profile/report" element={<ProfileReport />} />*/}
-        {/*</Route>*/}
-      </Routes>
-    </BrowserRouter>
-  );
 }
 
 export default App;
