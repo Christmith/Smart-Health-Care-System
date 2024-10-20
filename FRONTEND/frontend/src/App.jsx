@@ -53,6 +53,9 @@ import Profile from "./Components/chamath/Profile.jsx";
 import Appointments from "./Components/Kalindu/Appointments.jsx";
 import CustomerPayments from "./Components/asiri/CustomerPayments.jsx";
 
+import CustomerSignup from "./Components/chamath/customerSignup.jsx";
+
+
 
 
 
@@ -61,7 +64,7 @@ function App() {
         <BrowserRouter>
 
             <Routes>
-                <Route path="/" element={<Pay/>} />
+                <Route path="/" element={<CustomerSignup/>} />
                 <Route path="/admin" element={<AdminPanel />} />
                 <Route
                     element={
