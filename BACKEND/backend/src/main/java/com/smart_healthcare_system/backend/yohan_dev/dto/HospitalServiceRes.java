@@ -22,7 +22,7 @@ public class HospitalServiceRes {
     private String serviceId;
     private String serviceName;
     private String serviceDescription;
-    private List<PaymentOption> paymentOption;
+    private List<String> paymentOption;
     private String department;
     private String location;
     private Boolean status;

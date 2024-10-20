@@ -11,6 +11,7 @@ import java.util.List;
 
 //import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:5174")
 @RestController
 @AllArgsConstructor
 @RequestMapping("/appointments")
@@ -24,10 +25,16 @@ public class AppointmentCtrl {
         return appointmentService.getAppointments();
     }
 
+    @GetMapping("/cus/{cusEmail}")
+    public List<Appointment> getAllCusAppointments(@PathVariable String cusEmail) {
+        return appointmentService.getAllCusAppointments(cusEmail);
+    }
+
     @GetMapping("/{appid}")
     public Appointment getAppointmentById(@PathVariable String appid) {
         return appointmentService.getAppointmentById(appid);
     }
+
 
     @PostMapping("/add")
     public Appointment addAppointment(@RequestBody Appointment newAppointment) {
