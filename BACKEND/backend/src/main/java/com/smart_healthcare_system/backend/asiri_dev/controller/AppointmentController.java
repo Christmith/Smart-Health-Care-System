@@ -31,5 +31,9 @@ public class AppointmentController {
 
         return ResponseEntity.ok("Appointment status updated successfully.");
     }
+    @DeleteMapping("/admin-delete/{appointmentId}")
+    public void deleteAppointment(@PathVariable String appointmentId){
+        appointmentService.deleteAppointment(appointmentId);
+    }
 
 }

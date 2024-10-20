@@ -1,4 +1,4 @@
-package com.smart_healthcare_system.backend.payment_tests;
+package com.smart_healthcare_system.backend.payment_tests.service;
 
 import com.smart_healthcare_system.backend.asiri_dev.dto.PaymentResponse;
 import com.smart_healthcare_system.backend.asiri_dev.model.Payment;
@@ -69,7 +69,7 @@ public class PaymentServiceGetTest {
         // Verify the size of the result list
         assertEquals(2, paymentResponses.size());
 
-        // Verify the mapping of the first payment (skip paymentId comparison)
+        // Verify the mapping of the first payment
         PaymentResponse paymentResponse1 = paymentResponses.get(0);
         assertEquals(Payment.paymentCategory.Consultation, paymentResponse1.getPaymentCategory());
         assertEquals(1000, paymentResponse1.getPaymentAmount());
@@ -81,7 +81,7 @@ public class PaymentServiceGetTest {
         assertEquals("Test Remark 1", paymentResponse1.getRemarks());
         assertEquals("completed", paymentResponse1.getStatus());
 
-        // Verify the mapping of the second payment (skip paymentId comparison)
+        // Verify the mapping of the second payment
         PaymentResponse paymentResponse2 = paymentResponses.get(1);
         assertEquals(Payment.paymentCategory.Medication, paymentResponse2.getPaymentCategory());
         assertEquals(2000, paymentResponse2.getPaymentAmount());

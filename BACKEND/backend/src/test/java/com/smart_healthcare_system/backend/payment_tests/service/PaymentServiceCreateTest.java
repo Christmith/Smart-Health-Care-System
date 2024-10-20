@@ -1,4 +1,4 @@
-package com.smart_healthcare_system.backend.payment_tests;//package com.smart_healthcare_system.backend.payment_tests;
+package com.smart_healthcare_system.backend.payment_tests.service;//package com.smart_healthcare_system.backend.payment_tests;
 
 import com.smart_healthcare_system.backend.asiri_dev.dto.PaymentRequest;
 import com.smart_healthcare_system.backend.asiri_dev.model.Payment;
@@ -12,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -84,5 +85,22 @@ public class PaymentServiceCreateTest {
         assertEquals(1000, capturedPayment.getPaymentAmount());
         assertEquals(Payment.PaymentType.Card, capturedPayment.getPaymentType());
     }
+
+
+    //nagative Test case for check cardholderName is empty
+    @Test
+    public void createPayment_shouldThrowException_whenCardholderNameIsMissing() {
+        // Set an empty cardholder name
+        paymentRequest.setCardholderName("");
+
+        // Assert that an exception is thrown when the cardholder name is missing
+        assertThrows(IllegalArgumentException.class, () -> {
+            paymentService.createPayment(paymentRequest);
+        });
+
+        // Verify that the repository save method is never called due to validation failure
+        verify(paymentRepository, times(0)).save(any(Payment.class));
+    }
+
 }
 

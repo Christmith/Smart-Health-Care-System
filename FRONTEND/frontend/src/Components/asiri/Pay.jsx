@@ -4,10 +4,10 @@ function Pay() {
   return (
     <div style={styles.payContainer}>
       <div style={styles.payCard}>
-        <h3 style={styles.payTitle}>Payment Page</h3>
-        <p style={styles.payDescription}>Please proceed to make your payment below.</p>
+        <h3 style={styles.payTitle}>Smart HealthCare</h3>
+        <p style={styles.payDescription}>Please visit to our site below.</p>
         <div>
-          <button style={styles.payButton}>Make Payment</button>
+          <button style={styles.payButton}>View</button>
         </div>
       </div>
     </div>

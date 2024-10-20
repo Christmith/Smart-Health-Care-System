@@ -21,6 +21,12 @@ public class PaymentService implements PaymentServiceInterface {
 
     //Create Payment
     public void createPayment(PaymentRequest paymentRequest) {
+
+        if (paymentRequest.getCardholderName() == null || paymentRequest.getCardholderName().isEmpty()) {
+            throw new IllegalArgumentException("Cardholder name cannot be empty");
+        }
+
+
         Payment payment = Payment.builder()
                 .paymentCategory(paymentRequest.getPaymentCategory())
                 .paymentAmount(paymentRequest.getPaymentAmount())
