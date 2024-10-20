@@ -17,7 +17,7 @@ public class HospitalServiceReqTest {
         hospitalServiceReq = HospitalServiceReq.builder()
                 .serviceName("General Checkup")
                 .serviceDescription("Routine health checkup")
-                .paymentOption(Arrays.asList(PaymentOption.CASH_PAYMENT, PaymentOption.CARD_PAYMENT))
+                .paymentOption(Arrays.asList(PaymentOption.Cash, PaymentOption.Card))
                 .department("General Medicine")
                 .location("Building A")
                 .status(true)
@@ -65,13 +65,13 @@ public class HospitalServiceReqTest {
     // Positive and Negative Test for paymentOption
     @Test
     public void test_P_GetPaymentOption() {
-        List<PaymentOption> expectedOptions = Arrays.asList(PaymentOption.CASH_PAYMENT, PaymentOption.CARD_PAYMENT);
+        List<PaymentOption> expectedOptions = Arrays.asList(PaymentOption.Cash, PaymentOption.Card);
         assertThat(hospitalServiceReq.getPaymentOption()).isEqualTo(expectedOptions);
     }
 
     @Test
     public void test_N_GetPaymentOption() {
-        List<PaymentOption> incorrectOptions = Arrays.asList(PaymentOption.CASH_PAYMENT, PaymentOption.INSURANCE_PAYMENT);
+        List<PaymentOption> incorrectOptions = Arrays.asList(PaymentOption.Cash, PaymentOption.Insurance);
         assertThat(hospitalServiceReq.getPaymentOption()).isNotEqualTo(incorrectOptions);
     }
 
